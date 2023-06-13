@@ -1,0 +1,7 @@
+.idea/
+*.iml
+*.iws
+
+.gradle/
+build/
+/HELP.md
