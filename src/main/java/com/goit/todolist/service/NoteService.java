@@ -35,10 +35,6 @@ public class NoteService {
     }
 
     public Note getById(long id) {
-        return notes
-                .values()
-                .stream()
-                .toList()
-                .get((int) id);
+        return notes.get(id);
     }
 }
