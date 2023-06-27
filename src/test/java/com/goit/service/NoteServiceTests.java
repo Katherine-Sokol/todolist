@@ -1,6 +1,6 @@
-package com.goit.todolist.service;
+package com.goit.service;
 
-import com.goit.todolist.entity.Note;
+import com.goit.entity.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +56,7 @@ class NoteServiceTests {
         String updatedContent = "Updated content";
         note.setContent(updatedContent);
         noteService.update(note);
-        assertEquals(noteService.getById(7).getContent(), updatedContent);
+        Assertions.assertEquals(noteService.getById(7).getContent(), updatedContent);
     }
 
     @Test

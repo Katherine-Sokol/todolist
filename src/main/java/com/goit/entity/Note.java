@@ -1,4 +1,4 @@
-package com.goit.todolist.entity;
+package com.goit.entity;
 
 import lombok.Data;
 

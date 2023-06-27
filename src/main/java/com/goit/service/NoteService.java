@@ -1,6 +1,6 @@
-package com.goit.todolist.service;
+package com.goit.service;
 
-import com.goit.todolist.entity.Note;
+import com.goit.entity.Note;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

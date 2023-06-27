@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+          integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+     .note{
+        padding: 5px;
+        margin: 5px;
+        background-color: #A8A8A8;
+     }
+     .note-title {
+        padding: 10px;
+        margin: 5px;
+        background-color: #FB6D3A;
+        text-align: center
+      }
+     .note-content{
+        padding: 5px;
+        margin: 5px;
+        background-color: #E5E5E5;
+        text-align: center
+     }
+     .button{
+        margin: 0 auto;
+        display: block;
+     }
+</style>
+<body>
+    <h1>Notes</h1>
+    <h2 th:text="'Notes: ' + ${notes.size()}"></h2>
+    <div class="note" th:each="Note: ${notes}">
+        <div class="note-title" th:text="'Title: ' + ${Note.title}"></div>
+        <div class="note-content" th:text="'Content: ' + ${Note.content}"></div>
+        <div>
+            <form th:action="@{/note/edit/{id}(id=${Note.id})}" method="GET">
+                <button class="button" type="submit">Edit</button>
+            </form>
+            <form th:action="@{/note/list/delete/{id}(id=${Note.id})}" method="POST">
+                <button class="button" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
