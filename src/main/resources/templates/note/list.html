@@ -38,6 +38,11 @@
 <body>
     <h1>Notes</h1>
     <h2 th:text="'Notes: ' + ${notes.size()}"></h2>
+    <div>
+        <form th:action="@{/note/add}" method="GET">
+            <button type="submit">Create new note</button>
+        </form>
+    </div>
     <div class="note" th:each="Note: ${notes}">
         <div class="note-title" th:text="'Title: ' + ${Note.title}"></div>
         <div class="note-content" th:text="'Content: ' + ${Note.content}"></div>

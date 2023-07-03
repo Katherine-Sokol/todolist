@@ -3,19 +3,21 @@ package com.goit.controllers;
 import com.goit.entity.Note;
 import com.goit.service.NoteService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
+@RequestMapping("/note")
+@RequiredArgsConstructor
 public class NoteController {
-    private static final NoteService noteService = new NoteService(getDefaultMapOfNotes());
+    private final NoteService noteService;
+    private static final String REDIRECT = "redirect:/note/list";
 
-    @GetMapping(value = "/note/list")
+    @GetMapping(value = "/list")
     public ModelAndView getListNotes() {
         ModelAndView result = new ModelAndView("note/list");
         List<Note> notes = noteService.listAll();
@@ -23,13 +25,13 @@ public class NoteController {
         return result;
     }
 
-    @PostMapping(value = "/note/list/delete/{id}")
+    @PostMapping(value = "/list/delete/{id}")
     public String deleteNoteById(@PathVariable Long id){
         noteService.deleteById(id);
-        return "redirect:/note/list";
+        return REDIRECT;
     }
 
-    @GetMapping(value = "/note/edit/{id}")
+    @GetMapping(value = "/edit/{id}")
     public ModelAndView getEditPage(@PathVariable Long id){
         ModelAndView result = new ModelAndView("note/edit");
         Note note = noteService.getById(id);
@@ -37,24 +39,29 @@ public class NoteController {
         return result;
     }
 
-    @PostMapping(value = "/note/edit/{id}")
+
+
+    @PostMapping(value = "/edit/{id}")
     public String editNote(@PathVariable Long id, HttpServletRequest request){
         String content = request.getParameter("content");
         Note note = noteService.getById(id);
         note.setContent(content);
         noteService.update(note);
-        return "redirect:/note/list";
+        return REDIRECT;
     }
 
-    private static Map<Long, Note> getDefaultMapOfNotes() {
-        Map<Long, Note> noteMap = new HashMap<>();
-        for (int i = 0; i < 10; i++) {
-            Note note = new Note();
-            note.setId(i);
-            note.setTitle("Title " + i);
-            note.setContent("Content " + i);
-            noteMap.put(note.getId(), note);
-        }
-        return noteMap;
+    @GetMapping(value = "/add")
+    public ModelAndView getEditPage(){
+        return new ModelAndView("note/add");
+    }
+
+
+    @PostMapping(value = "/add")
+    public String createNewNote(HttpServletRequest request){
+        Note note = new Note();
+        note.setTitle(request.getParameter("title"));
+        note.setContent(request.getParameter("content"));
+        noteService.add(note);
+        return REDIRECT;
     }
 }
