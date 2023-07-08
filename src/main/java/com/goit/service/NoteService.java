@@ -17,7 +17,10 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public Note add(Note note) {
+    public Note add(String title, String content) {
+        Note note = new Note();
+        note.setTitle(title);
+        note.setContent(content);
         return noteRepository.save(note);
     }
 
@@ -25,9 +28,13 @@ public class NoteService {
         noteRepository.deleteById(id);
     }
 
-    public void update(Note note) {
+    public void update(Long id, String content) {
+        Note note = getById(id);
+        note.setContent(content);
         noteRepository.save(note);
     }
+
+
 
     public Note getById(Long id) {
         Optional<Note> note = noteRepository.findById(id);

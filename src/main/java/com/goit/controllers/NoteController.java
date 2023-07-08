@@ -43,10 +43,7 @@ public class NoteController {
 
     @PostMapping(value = "/edit/{id}")
     public String editNote(@PathVariable Long id, HttpServletRequest request){
-        String content = request.getParameter("content");
-        Note note = noteService.getById(id);
-        note.setContent(content);
-        noteService.update(note);
+        noteService.update(id, request.getParameter("content"));
         return REDIRECT;
     }
 
@@ -58,10 +55,7 @@ public class NoteController {
 
     @PostMapping(value = "/add")
     public String createNewNote(HttpServletRequest request){
-        Note note = new Note();
-        note.setTitle(request.getParameter("title"));
-        note.setContent(request.getParameter("content"));
-        noteService.add(note);
+        noteService.add(request.getParameter("title"), request.getParameter("content"));
         return REDIRECT;
     }
 }
