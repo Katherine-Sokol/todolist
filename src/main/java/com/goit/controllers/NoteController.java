@@ -1,6 +1,6 @@
 package com.goit.controllers;
 
-import com.goit.entity.Note;
+import com.goit.entities.Note;
 import com.goit.service.NoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +39,6 @@ public class NoteController {
         return result;
     }
 
-
-
     @PostMapping(value = "/edit/{id}")
     public String editNote(@PathVariable Long id, HttpServletRequest request){
         noteService.update(id, request.getParameter("content"));
@@ -51,7 +49,6 @@ public class NoteController {
     public ModelAndView getEditPage(){
         return new ModelAndView("note/add");
     }
-
 
     @PostMapping(value = "/add")
     public String createNewNote(HttpServletRequest request){

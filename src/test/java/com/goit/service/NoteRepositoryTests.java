@@ -1,6 +1,6 @@
 package com.goit.service;
 
-import com.goit.entity.Note;
+import com.goit.entities.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

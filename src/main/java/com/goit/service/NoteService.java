@@ -1,6 +1,6 @@
 package com.goit.service;
 
-import com.goit.entity.Note;
+import com.goit.entities.Note;
 import com.goit.exceptions.NoteNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,8 +33,6 @@ public class NoteService {
         note.setContent(content);
         noteRepository.save(note);
     }
-
-
 
     public Note getById(Long id) {
         Optional<Note> note = noteRepository.findById(id);
